@@ -16,4 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [path('admin/', admin.site.urls), path('customer', include())]
+from rest_framework import routers
+
+import customer_info.api.urls as customer_info_urls
+import route_info.api.urls as route_info_urls
+import bus_info.api.urls as bus_info_urls
+
+router = routers.DefaultRouter(trailing_slash=False)
+router.registry.extend(customer_info_urls.router.registry)
+router.registry.extend(route_info_urls.router.registry)
+router.registry.extend(bus_info_urls.router.registry)
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path(r'api/', include(router.urls)),
+]

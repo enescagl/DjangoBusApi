@@ -1,15 +1,19 @@
-from django.urls import path, include
-
+from route_info.api.views import (
+    LocationViewSet,
+    RouteViewSet,
+    DriverViewSet,
+    TripViewSet,
+)
 from rest_framework import routers
 
-from views import LocationViewSet, RouteViewSet, DriverViewSet, TripViewSet
+from django.urls import path, include
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'location-list', LocationViewSet)
-router.register(r'route-list', RouteViewSet)
-router.register(r'driver-list', DriverViewSet)
-router.register(r'trip-list', TripViewSet)
+router.register(r'location', LocationViewSet)
+router.register(r'route', RouteViewSet)
+router.register(r'driver', DriverViewSet)
+router.register(r'trip', TripViewSet)
 
-urlpatterns = [
-    path(r'', include(router.urls)),
-]
+# urlpatterns = [
+#     path('', include(router.urls)),
+# ]

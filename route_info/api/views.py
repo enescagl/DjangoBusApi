@@ -1,24 +1,29 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from route_info.models import Location, Route, Driver, Trip
-from serializers import LocationSerializer, RouteSerializer, DriverSerializer, TripSerializer
+from route_info.api.serializers import (
+    LocationSerializer,
+    RouteSerializer,
+    DriverSerializer,
+    TripSerializer,
+)
 
 
-class LocationViewSet(generics.ListCreateAPIView):
+class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
 
 
-class RouteViewSet(generics.ListCreateAPIView):
+class RouteViewSet(viewsets.ModelViewSet):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
 
 
-class DriverViewSet(generics.ListCreateAPIView):
+class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
 
 
-class TripViewSet(generics.ListCreateAPIView):
+class TripViewSet(viewsets.ModelViewSet):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
