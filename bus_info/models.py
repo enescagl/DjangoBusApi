@@ -1,14 +1,16 @@
 from django.db import models
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 
 class BusType(models.Model):
     createdAt = models.DateTimeField(default=now, blank=False)
     isDeleted = models.BooleanField(default=False)
     deletedAt = models.DateTimeField(blank=True)
+    createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    brand = models.CharField()
-    model = models.CharField()
+    brand = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
     seatCount = models.IntegerField(blank=False)
     internet = models.BooleanField(default=False)
     tv = models.BooleanField(default=False)
@@ -20,7 +22,7 @@ class Bus(models.Model):
     createdAt = models.DateTimeField(default=now, blank=False)
     isDeleted = models.BooleanField(default=False)
     deletedAt = models.DateTimeField(blank=True)
+    createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
 
     licencePlate = models.CharField(max_length=8)
-
     busType = models.ForeignKey(BusType, on_delete=models.CASCADE)
