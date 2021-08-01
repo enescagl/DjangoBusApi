@@ -2,13 +2,15 @@ from rest_framework import serializers
 from bus_info.models import Bus, BusType
 
 
-class BusSerializer(serializers.HyperlinkedModelSerializer):
+class BusTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bus
+        model = BusType
         fields = '__all__'
 
 
-class BusTypeSerializer(serializers.HyperlinkedModelSerializer):
+class BusSerializer(serializers.ModelSerializer):
+    bus_type = BusTypeSerializer(many=True, read_only=True)
+
     class Meta:
-        model = BusType
+        model = Bus
         fields = '__all__'

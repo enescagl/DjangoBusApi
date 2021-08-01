@@ -14,6 +14,6 @@ router.register(r'route', RouteViewSet)
 router.register(r'driver', DriverViewSet)
 router.register(r'trip', TripViewSet)
 
-# urlpatterns = [
-#     path('', include(router.urls)),
-# ]
+urlpatterns = [
+    path('', include(router.urls)),
+]

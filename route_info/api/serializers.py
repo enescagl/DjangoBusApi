@@ -1,3 +1,4 @@
+from bus_info.api.serializers import BusSerializer
 from rest_framework import serializers
 from route_info.models import Location, Driver, Route, Trip
 
@@ -8,7 +9,7 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class DriverSerializer(serializers.HyperlinkedIdentityField):
+class DriverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Driver
         fields = '__all__'

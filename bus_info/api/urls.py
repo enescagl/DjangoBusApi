@@ -8,6 +8,6 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'bustype', BusTypeViewSet)
 router.register(r'bus', BusViewSet)
 
-# urlpatterns = [
-#     path('', include(router.urls)),
-# ]
+urlpatterns = [
+    path('', include(router.urls)),
+]
