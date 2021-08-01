@@ -22,6 +22,12 @@ import customer_info.api.urls as customer_info_urls
 import route_info.api.urls as route_info_urls
 import bus_info.api.urls as bus_info_urls
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 router = routers.DefaultRouter(trailing_slash=False)
 router.registry.extend(customer_info_urls.router.registry)
 router.registry.extend(route_info_urls.router.registry)
@@ -29,5 +35,14 @@ router.registry.extend(bus_info_urls.router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/swagger/',
+         SpectacularSwaggerView.as_view(url_name='schema'),
+         name='swagger-ui'),
+    path('api/token/', TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('api/token/refresh/',
+         TokenRefreshView.as_view(),
+         name='token_refresh'),
     path(r'api/', include(router.urls)),
 ]
