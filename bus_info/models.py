@@ -1,25 +1,20 @@
 from django.db import models
-from django.utils.timezone import now
+
+from base import models as base_models
 
 
-class BusType(models.Model):
-    createdAt = models.DateTimeField(default=now, blank=False)
-    isDeleted = models.BooleanField(default=False)
-    deletedAt = models.DateTimeField(blank=True)
-
+class BusType(base_models.TimestampedModel):
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
-    seatCount = models.IntegerField(blank=False)
+    seat_count = models.IntegerField(blank=False)
     internet = models.BooleanField(default=False)
     tv = models.BooleanField(default=False)
-    powerOutlet = models.BooleanField(default=False)
+    power_outlet = models.BooleanField(default=False)
     tablet = models.BooleanField(default=False)
 
 
-class Bus(models.Model):
-    createdAt = models.DateTimeField(default=now, blank=False)
-    isDeleted = models.BooleanField(default=False)
-    deletedAt = models.DateTimeField(blank=True)
-
-    licencePlate = models.CharField(max_length=8)
-    busType = models.ForeignKey(BusType, on_delete=models.CASCADE)
+class Bus(base_models.TimestampedModel):
+    licence_plate = models.CharField(max_length=8)
+    bus_type = models.ForeignKey(BusType,
+                                 on_delete=models.CASCADE,
+                                 related_name="bus_type")
